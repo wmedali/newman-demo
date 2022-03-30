@@ -1,6 +1,6 @@
-name: Execution des tests
+name: Execution des tests avec newman action
 
-on: [push, workflow_dispatch]
+on: [workflow_dispatch]
 
 jobs:
   test:
