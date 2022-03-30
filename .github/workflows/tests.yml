@@ -13,7 +13,7 @@ jobs:
         run: npm install --global newman newman-reporter-htmlextra
 
       - name: Run Postman tests
-        run: newman run collection.json -r cli,junit,htmlextra
+        run: newman run newman run "https://api.getpostman.com/collections/92eb399c-cb83-4ca8-a02c-fcdd8e244716?apikey=${{ secrets.POSTMAN_API_KEY}}" -r cli,junit,htmlextra
 
       - name: Publish JUnit reports
         uses: dorny/test-reporter@v1
