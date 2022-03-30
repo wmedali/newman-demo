@@ -8,7 +8,17 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
       - name: Install dependencies
         run: npm install --global newman
+
       - name: Run Postman tests
-        run: newman run collection.json
+        run: newman run collection.json -r cli,junit
+
+      - name: Publish JUnit reports
+        uses: dorny/test-reporter@v1
+        if: always()
+        with:
+          name: API tests # Name of the check run which will be created
+          path: newman/*.xml # Path to test results
+          reporter: jest-junit
