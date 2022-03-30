@@ -21,4 +21,4 @@ jobs:
         with:
           name: API tests # Name of the check run which will be created
           path: newman/*.xml # Path to test results
-          reporter: jest-junit
+          reporter: java-junit
