@@ -1,0 +1,220 @@
+{
+	"info": {
+		"_postman_id": "92eb399c-cb83-4ca8-a02c-fcdd8e244716",
+		"name": "Projet 2 - Test Google Books",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "LIST BOOKS",
+			"item": [
+				{
+					"name": "Get a list of books by title",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"let responseJson = pm.response.json();\r",
+									"console.log(responseJson.items.length)\r",
+									"responseJson.items.forEach(element => console.log(\"title : \" + element.volumeInfo.title + \" subtitle : \" + element.volumeInfo.subtitle));\r",
+									""
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.collectionVariables.set('title', pm.variables.replaceIn('{{$randomNoun}}'));",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://www.googleapis.com/books/v1/volumes?q=+intitle:{{title}}",
+							"protocol": "https",
+							"host": [
+								"www",
+								"googleapis",
+								"com"
+							],
+							"path": [
+								"books",
+								"v1",
+								"volumes"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "+intitle:{{title}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a list of books by author",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.collectionVariables.set('author', pm.variables.replaceIn('{{$randomFirstName}}'));",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://www.googleapis.com/books/v1/volumes?q=+inauthor:{{author}}",
+							"protocol": "https",
+							"host": [
+								"www",
+								"googleapis",
+								"com"
+							],
+							"path": [
+								"books",
+								"v1",
+								"volumes"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "+inauthor:{{author}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a list of books by publisher",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://www.googleapis.com/books/v1/volumes?q=+inpublisher:Le Livre de Poche",
+							"protocol": "https",
+							"host": [
+								"www",
+								"googleapis",
+								"com"
+							],
+							"path": [
+								"books",
+								"v1",
+								"volumes"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "+inpublisher:Le Livre de Poche"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a list of books by category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://www.googleapis.com/books/v1/volumes?q=Mazurka+subject:Detective",
+							"protocol": "https",
+							"host": [
+								"www",
+								"googleapis",
+								"com"
+							],
+							"path": [
+								"books",
+								"v1",
+								"volumes"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "Mazurka+subject:Detective"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "GET BOOK",
+			"item": [
+				{
+					"name": "Get a book by its ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://www.googleapis.com/books/v1/volumes/jSJmCAAAQBAJ",
+							"protocol": "https",
+							"host": [
+								"www",
+								"googleapis",
+								"com"
+							],
+							"path": [
+								"books",
+								"v1",
+								"volumes",
+								"jSJmCAAAQBAJ"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "title",
+			"value": ""
+		},
+		{
+			"key": "author",
+			"value": ""
+		}
+	]
+}
